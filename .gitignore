@@ -1,0 +1,19 @@
+# Environment & IDE
+.env
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Uploads (user-generated content)
+uploads/
+
+# Temporary files
+upload_logo.php
+*.log
+*.tmp
+
+# XAMPP / Server
+.htaccess.bak

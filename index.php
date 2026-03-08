@@ -1,0 +1,405 @@
+<?php
+/**
+ * Miemploya Consult — Homepage
+ */
+require_once __DIR__ . '/includes/db.php';
+
+// Fetch dynamic content
+$featured_products = db_query("SELECT * FROM products WHERE is_active = 1 ORDER BY sort_order ASC");
+$latest_news = db_query("SELECT * FROM news_posts ORDER BY publish_date DESC, created_at DESC LIMIT 3");
+$featured_videos = db_query("SELECT * FROM videos ORDER BY publish_date DESC, created_at DESC LIMIT 3");
+$upcoming_training = db_query("SELECT * FROM training_programs WHERE is_active = 1 AND program_date >= CURDATE() ORDER BY program_date ASC LIMIT 4");
+$open_vacancies_count = db_value("SELECT COUNT(*) FROM job_vacancies WHERE is_active = 1");
+
+$page_title = 'Home';
+$page_description = 'Miemploya Consult — Business Consulting, Digital Solutions & Professional Development by Empleo System Limited.';
+include __DIR__ . '/includes/header.php';
+?>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════ -->
+<section class="relative overflow-hidden mesh-bg">
+    <!-- Floating Decorations -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-400/10 rounded-full blur-3xl float-animate"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/8 rounded-full blur-3xl float-animate" style="animation-delay:2s"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-blue-400/6 rounded-full blur-3xl float-animate" style="animation-delay:4s"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 border border-brand-200 rounded-full text-xs font-bold text-brand-600 mb-6">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Empleo System Limited
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+                    Business Consulting & 
+                    <span class="gradient-text">Digital Solutions</span>
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-lg">
+                    Your central hub for consulting services, recruitment opportunities, professional training, business resources, and cutting-edge technology products.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="<?= SITE_URL ?>/services.php" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 text-white font-bold rounded-2xl shadow-xl shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-105 transition-all">
+                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                        Our Services
+                    </a>
+                    <a href="<?= SITE_URL ?>/products.php" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl shadow-lg border border-slate-200 hover:border-brand-300 hover:text-brand-600 hover:shadow-xl transition-all">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                        Explore Products
+                    </a>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-6 mt-12">
+                    <div>
+                        <p class="text-3xl font-black gradient-text"><?= count($featured_products) ?></p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Digital Products</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-black gradient-text"><?= $open_vacancies_count ?></p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Open Vacancies</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-black gradient-text">6+</p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Core Services</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right — Abstract Dashboard Visual -->
+            <div class="hidden lg:block relative">
+                <div class="relative bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                    <!-- Mock Dashboard -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center">
+                                <span class="text-white font-black text-sm">MC</span>
+                            </div>
+                            <div>
+                                <div class="h-3 w-32 bg-slate-200 rounded-full"></div>
+                                <div class="h-2 w-20 bg-slate-100 rounded-full mt-1.5"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100">
+                                <i data-lucide="briefcase" class="w-5 h-5 text-emerald-600 mb-2"></i>
+                                <div class="h-2 w-12 bg-emerald-200 rounded-full"></div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+                                <i data-lucide="users" class="w-5 h-5 text-blue-600 mb-2"></i>
+                                <div class="h-2 w-10 bg-blue-200 rounded-full"></div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-100">
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-purple-600 mb-2"></i>
+                                <div class="h-2 w-14 bg-purple-200 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="h-2.5 w-24 bg-slate-200 rounded-full"></div>
+                                <div class="h-2 w-12 bg-brand-200 rounded-full"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-8 bg-gradient-to-r from-brand-100/50 to-transparent rounded-lg"></div>
+                                <div class="h-8 bg-gradient-to-r from-emerald-100/50 to-transparent rounded-lg"></div>
+                                <div class="h-8 bg-gradient-to-r from-purple-100/50 to-transparent rounded-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Floating Badge -->
+                <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-slate-100 px-5 py-3 flex items-center gap-3 float-animate" style="animation-delay:1s">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-slate-900">Trusted Platform</p>
+                        <p class="text-[10px] text-slate-400">Enterprise Grade Security</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SERVICES OVERVIEW
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full text-xs font-bold text-brand-600 mb-4">
+                <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> What We Do
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4">Consulting & Advisory <span class="gradient-text">Services</span></h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">We help organizations optimize operations, manage workforce, and drive business growth through strategic advisory and technology solutions.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <?php
+            $services = [
+                ['Human Resource Consulting', 'Strategic HR advisory for recruitment, talent management, employee relations, and organizational development.', 'users', 'from-blue-500 to-indigo-600', 'blue'],
+                ['Payroll Management Advisory', 'Expert guidance on payroll processing, statutory compliance, tax optimization, and compensation structuring.', 'banknote', 'from-emerald-500 to-teal-600', 'emerald'],
+                ['Business Development', 'Strategic planning, market analysis, partnership development, and revenue growth strategies for your organization.', 'trending-up', 'from-purple-500 to-violet-600', 'purple'],
+                ['Audit & Compliance', 'Comprehensive audit support, regulatory compliance monitoring, and risk assessment for business operations.', 'shield-check', 'from-amber-500 to-orange-600', 'amber'],
+                ['Process Optimization', 'Business process re-engineering, workflow automation, and operational efficiency improvement.', 'settings', 'from-cyan-500 to-blue-600', 'cyan'],
+                ['Workforce Monitoring', 'Employee monitoring systems, productivity tracking, attendance management, and performance analytics.', 'activity', 'from-rose-500 to-pink-600', 'rose'],
+                ['Digital Business Solutions', 'Bespoke software design, development, and deployment tailored to your unique business requirements — from enterprise platforms to mobile-ready tools.', 'code-2', 'from-violet-500 to-fuchsia-600', 'violet'],
+            ];
+            foreach ($services as $i => $svc):
+            ?>
+            <div class="reveal group relative bg-white rounded-2xl p-6 border border-slate-100 hover:border-<?= $svc[4] ?>-200 hover:shadow-xl hover:shadow-<?= $svc[4] ?>-500/10 transition-all duration-300" style="transition-delay: <?= $i * 80 ?>ms">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br <?= $svc[3] ?> flex items-center justify-center shadow-lg shadow-<?= $svc[4] ?>-500/30 mb-5 group-hover:scale-110 transition-transform">
+                    <i data-lucide="<?= $svc[2] ?>" class="w-7 h-7 text-white"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2"><?= $svc[0] ?></h3>
+                <p class="text-sm text-slate-500 leading-relaxed"><?= $svc[1] ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="text-center mt-10 reveal">
+            <a href="<?= SITE_URL ?>/services.php" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                Request a Consultation
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURED PRODUCTS
+     ═══════════════════════════════════════════════════════════ -->
+<?php if (!empty($featured_products)): ?>
+<section class="py-20 mesh-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full text-xs font-bold text-purple-600 mb-4">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Our Products
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4">Digital <span class="gradient-text">Solutions</span></h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">Cutting-edge software platforms designed to streamline operations and drive organizational efficiency.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php foreach ($featured_products as $i => $product): 
+                $features = json_decode($product['features'], true) ?: [];
+            ?>
+            <div class="reveal group bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-2 transition-all duration-500" style="transition-delay: <?= $i * 100 ?>ms">
+                <!-- Product Header -->
+                <div class="p-6 bg-gradient-to-br" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>15, <?= $product['color_to'] ?>10);">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-4" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
+                        <i data-lucide="<?= $product['icon_class'] ?: 'box' ?>" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900"><?= sanitize($product['name']) ?></h3>
+                    <p class="text-xs text-slate-500 mt-1 font-medium"><?= sanitize($product['tagline']) ?></p>
+                </div>
+                <!-- Features -->
+                <div class="p-6 pt-4">
+                    <ul class="space-y-2 mb-6">
+                        <?php foreach (array_slice($features, 0, 4) as $feat): ?>
+                        <li class="flex items-center gap-2 text-sm text-slate-600">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i>
+                            <?= sanitize($feat) ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <a href="<?= SITE_URL ?>/product.php?slug=<?= urlencode($product['slug']) ?>" 
+                       class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 group-hover:gap-3 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- ═══════════════════════════════════════════════════════════
+     UPCOMING TRAINING
+     ═══════════════════════════════════════════════════════════ -->
+<?php if (!empty($upcoming_training)): ?>
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 reveal">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-50 rounded-full text-xs font-bold text-violet-600 mb-4">
+                    <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i> Upcoming Events
+                </div>
+                <h2 class="text-3xl font-black text-slate-900">Training & <span class="gradient-text">Conferences</span></h2>
+            </div>
+            <a href="<?= SITE_URL ?>/training.php" class="inline-flex items-center gap-2 px-5 py-2.5 bg-violet-50 text-violet-600 font-bold rounded-xl hover:bg-violet-100 transition-colors text-sm">
+                View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php foreach ($upcoming_training as $i => $program): ?>
+            <div class="reveal group bg-white rounded-2xl border border-slate-100 hover:border-violet-200 hover:shadow-xl transition-all duration-300 overflow-hidden" style="transition-delay: <?= $i * 80 ?>ms">
+                <div class="p-1.5">
+                    <div class="bg-gradient-to-br from-violet-500/10 to-purple-500/5 rounded-xl p-5">
+                        <div class="flex items-center gap-2 text-xs text-violet-600 font-bold mb-3">
+                            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                            <?= $program['program_date'] ? format_date($program['program_date']) : 'TBA' ?>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 line-clamp-2"><?= sanitize($program['title']) ?></h3>
+                        <p class="text-sm text-slate-500 line-clamp-2"><?= sanitize($program['venue'] ?: 'Venue TBA') ?></p>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 flex items-center justify-between">
+                    <span class="text-sm font-bold <?= $program['fee'] > 0 ? 'text-amber-600' : 'text-emerald-600' ?>">
+                        <?= $program['fee'] > 0 ? '₦' . number_format($program['fee']) : 'Free' ?>
+                    </span>
+                    <a href="<?= SITE_URL ?>/training.php" class="text-xs font-bold text-brand-600 hover:text-brand-700">Register →</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LATEST NEWS
+     ═══════════════════════════════════════════════════════════ -->
+<?php if (!empty($latest_news)): ?>
+<section class="py-20 mesh-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 reveal">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 rounded-full text-xs font-bold text-sky-600 mb-4">
+                    <i data-lucide="newspaper" class="w-3.5 h-3.5"></i> Latest Updates
+                </div>
+                <h2 class="text-3xl font-black text-slate-900">News & <span class="gradient-text">Announcements</span></h2>
+            </div>
+            <a href="<?= SITE_URL ?>/news.php" class="inline-flex items-center gap-2 px-5 py-2.5 bg-sky-50 text-sky-600 font-bold rounded-xl hover:bg-sky-100 transition-colors text-sm">
+                All News <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <?php foreach ($latest_news as $i => $news): ?>
+            <div class="reveal group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300" style="transition-delay: <?= $i * 100 ?>ms">
+                <?php if ($news['image_path']): ?>
+                <div class="h-48 bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
+                    <img src="<?= SITE_URL ?>/uploads/news/<?= $news['image_path'] ?>" alt="<?= sanitize($news['title']) ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <?php else: ?>
+                <div class="h-48 bg-gradient-to-br from-brand-50 to-purple-50 flex items-center justify-center">
+                    <i data-lucide="newspaper" class="w-12 h-12 text-brand-300"></i>
+                </div>
+                <?php endif; ?>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 text-xs text-slate-400 font-medium mb-3">
+                        <i data-lucide="clock" class="w-3 h-3"></i>
+                        <?= $news['publish_date'] ? format_date($news['publish_date']) : format_date($news['created_at']) ?>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 line-clamp-2"><?= sanitize($news['title']) ?></h3>
+                    <p class="text-sm text-slate-500 line-clamp-3"><?= sanitize($news['description']) ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CAREERS CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 relative overflow-hidden">
+    <!-- Decorations -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 left-20 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-20 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs font-bold text-brand-300 mb-6 border border-white/10">
+            <i data-lucide="rocket" class="w-3.5 h-3.5"></i> Join Our Team
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">Ready to Build Your <span class="text-brand-400">Career?</span></h2>
+        <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">Explore exciting job opportunities across various roles and industries. Submit your application and take the next step in your professional journey.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="<?= SITE_URL ?>/careers.php" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 text-white font-bold rounded-2xl shadow-xl shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-105 transition-all">
+                <i data-lucide="search" class="w-5 h-5"></i>
+                Browse Vacancies
+            </a>
+            <a href="<?= SITE_URL ?>/templates.php" class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+                Download Templates
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LATEST VIDEOS
+     ═══════════════════════════════════════════════════════════ -->
+<?php if (!empty($featured_videos)): ?>
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 reveal">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full text-xs font-bold text-red-600 mb-4">
+                    <i data-lucide="video" class="w-3.5 h-3.5"></i> Media
+                </div>
+                <h2 class="text-3xl font-black text-slate-900">Latest <span class="gradient-text">Videos</span></h2>
+            </div>
+            <a href="<?= SITE_URL ?>/videos.php" class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 font-bold rounded-xl hover:bg-red-100 transition-colors text-sm">
+                View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <?php foreach ($featured_videos as $i => $video): 
+                // Extract embed URL
+                $embed_url = '';
+                $vurl = $video['video_url'];
+                if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/', $vurl, $m)) {
+                    $embed_url = 'https://www.youtube.com/embed/' . $m[1];
+                } elseif (preg_match('/vimeo\.com\/(\d+)/', $vurl, $m)) {
+                    $embed_url = 'https://player.vimeo.com/video/' . $m[1];
+                }
+            ?>
+            <div class="reveal group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:border-red-200 transition-all duration-500" style="transition-delay: <?= $i * 120 ?>ms">
+                <div class="relative aspect-video bg-slate-100 overflow-hidden">
+                    <?php if ($embed_url): ?>
+                    <iframe src="<?= $embed_url ?>" title="<?= sanitize($video['title']) ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                    <?php elseif ($video['thumbnail_path']): ?>
+                    <a href="<?= sanitize($vurl) ?>" target="_blank" class="block w-full h-full relative">
+                        <img src="<?= SITE_URL ?>/uploads/videos/<?= $video['thumbnail_path'] ?>" alt="<?= sanitize($video['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                <i data-lucide="play" class="w-7 h-7 text-red-600 ml-1"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <?php else: ?>
+                    <a href="<?= sanitize($vurl) ?>" target="_blank" class="w-full h-full bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center shadow-lg mx-auto mb-3">
+                                <i data-lucide="play" class="w-7 h-7 text-red-500 ml-1"></i>
+                            </div>
+                            <p class="text-xs text-red-400 font-medium">Watch Video</p>
+                        </div>
+                    </a>
+                    <?php endif; ?>
+                </div>
+                <div class="p-5">
+                    <h4 class="font-bold text-slate-900 line-clamp-2 mb-1"><?= sanitize($video['title']) ?></h4>
+                    <p class="text-xs text-slate-400"><?= $video['publish_date'] ? format_date($video['publish_date']) : '' ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php include __DIR__ . '/includes/footer.php'; ?>
