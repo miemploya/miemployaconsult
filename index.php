@@ -31,7 +31,7 @@ include __DIR__ . '/includes/header.php';
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Left Content -->
             <div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 border border-brand-200 rounded-full text-xs font-bold text-brand-600 mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/20 rounded-full text-xs font-bold text-brand-600 dark:text-brand-400 mb-6">
                     <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                     Empleo System Limited
                 </div>
@@ -39,7 +39,7 @@ include __DIR__ . '/includes/header.php';
                     Business Consulting & 
                     <span class="gradient-text">Digital Solutions</span>
                 </h1>
-                <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-lg">
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8 max-w-lg">
                     Your central hub for consulting services, recruitment opportunities, professional training, business resources, and cutting-edge technology products.
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -47,7 +47,7 @@ include __DIR__ . '/includes/header.php';
                         <i data-lucide="briefcase" class="w-5 h-5"></i>
                         Our Services
                     </a>
-                    <a href="<?= SITE_URL ?>/products.php" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl shadow-lg border border-slate-200 hover:border-brand-300 hover:text-brand-600 hover:shadow-xl transition-all">
+                    <a href="<?= SITE_URL ?>/products.php" class="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 hover:shadow-xl transition-all">
                         <i data-lucide="box" class="w-5 h-5"></i>
                         Explore Products
                     </a>
@@ -57,86 +57,97 @@ include __DIR__ . '/includes/header.php';
                 <div class="grid grid-cols-3 gap-6 mt-12">
                     <div>
                         <p class="text-3xl font-black gradient-text"><?= count($featured_products) ?></p>
-                        <p class="text-xs text-slate-500 font-medium mt-1">Digital Products</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">Digital Products</p>
                     </div>
                     <div>
                         <p class="text-3xl font-black gradient-text"><?= $open_vacancies_count ?></p>
-                        <p class="text-xs text-slate-500 font-medium mt-1">Open Vacancies</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">Open Vacancies</p>
                     </div>
                     <div>
                         <p class="text-3xl font-black gradient-text">6+</p>
-                        <p class="text-xs text-slate-500 font-medium mt-1">Core Services</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">Core Services</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Right — Abstract Dashboard Visual -->
-            <div class="hidden lg:block relative">
-                <div class="relative bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                    <!-- Mock Dashboard -->
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center">
-                                <span class="text-white font-black text-sm">MC</span>
-                            </div>
-                            <div>
-                                <div class="h-3 w-32 bg-slate-200 rounded-full"></div>
-                                <div class="h-2 w-20 bg-slate-100 rounded-full mt-1.5"></div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div class="p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100">
-                                <i data-lucide="briefcase" class="w-5 h-5 text-emerald-600 mb-2"></i>
-                                <div class="h-2 w-12 bg-emerald-200 rounded-full"></div>
-                            </div>
-                            <div class="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
-                                <i data-lucide="users" class="w-5 h-5 text-blue-600 mb-2"></i>
-                                <div class="h-2 w-10 bg-blue-200 rounded-full"></div>
-                            </div>
-                            <div class="p-4 rounded-xl bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-100">
-                                <i data-lucide="graduation-cap" class="w-5 h-5 text-purple-600 mb-2"></i>
-                                <div class="h-2 w-14 bg-purple-200 rounded-full"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                            <div class="flex justify-between items-center mb-3">
-                                <div class="h-2.5 w-24 bg-slate-200 rounded-full"></div>
-                                <div class="h-2 w-12 bg-brand-200 rounded-full"></div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="h-8 bg-gradient-to-r from-brand-100/50 to-transparent rounded-lg"></div>
-                                <div class="h-8 bg-gradient-to-r from-emerald-100/50 to-transparent rounded-lg"></div>
-                                <div class="h-8 bg-gradient-to-r from-purple-100/50 to-transparent rounded-lg"></div>
-                            </div>
+            <!-- Right — Product Infographic Slideshow -->
+            <div class="hidden lg:block relative" x-data="heroSlider()" x-init="start()">
+                <div class="relative bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 dark:border-slate-700/50 overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                    <?php
+                    $heroSlideDir = __DIR__ . '/assets/images/hero/';
+                    $heroSlides = [];
+                    if (is_dir($heroSlideDir)) {
+                        foreach (glob($heroSlideDir . '*.{png,jpg,jpeg,gif,webp}', GLOB_BRACE) as $f) {
+                            $heroSlides[] = basename($f);
+                        }
+                        sort($heroSlides);
+                        $heroSlides = array_slice($heroSlides, 0, 10);
+                    }
+                    ?>
+                    <?php if (!empty($heroSlides)): ?>
+                    <div class="relative aspect-[4/3] w-full">
+                        <?php foreach ($heroSlides as $si => $hs): ?>
+                        <img src="<?= SITE_URL ?>/assets/images/hero/<?= $hs ?>" 
+                             alt="Product Preview <?= $si + 1 ?>"
+                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                             :class="current === <?= $si ?> ? 'opacity-100 z-10' : 'opacity-0 z-0'"
+                             loading="<?= $si === 0 ? 'eager' : 'lazy' ?>">
+                        <?php endforeach; ?>
+                        <!-- Slide dots -->
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+                            <?php foreach ($heroSlides as $si => $hs): ?>
+                            <button @click="goTo(<?= $si ?>)" class="w-2 h-2 rounded-full transition-all duration-300" :class="current === <?= $si ?> ? 'bg-white w-6 shadow' : 'bg-white/40 hover:bg-white/70'"></button>
+                            <?php endforeach; ?>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <!-- Fallback placeholder when no slides uploaded -->
+                    <div class="aspect-[4/3] w-full bg-gradient-to-br from-brand-50 via-purple-50 to-indigo-50 flex items-center justify-center">
+                        <div class="text-center p-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i data-lucide="monitor" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <p class="text-slate-400 text-sm font-medium">Product Showcase</p>
+                            <p class="text-slate-300 text-xs mt-1">Upload slides via Admin Panel</p>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <!-- Floating Badge -->
-                <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-slate-100 px-5 py-3 flex items-center gap-3 float-animate" style="animation-delay:1s">
+                <div class="absolute -bottom-4 -left-4 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 px-5 py-3 flex items-center gap-3 float-animate" style="animation-delay:1s">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                         <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
                     </div>
                     <div>
-                        <p class="text-sm font-bold text-slate-900">Trusted Platform</p>
-                        <p class="text-[10px] text-slate-400">Enterprise Grade Security</p>
+                        <p class="text-sm font-bold text-slate-900 dark:text-white">Trusted Platform</p>
+                        <p class="text-[10px] text-slate-400 dark:text-slate-500">Enterprise Grade Security</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+function heroSlider() {
+    return {
+        current: 0, total: <?= !empty($heroSlides) ? count($heroSlides) : 1 ?>, timer: null,
+        start() { this.timer = setInterval(() => { this.current = (this.current + 1) % this.total; }, 4000); },
+        goTo(i) { this.current = i; clearInterval(this.timer); this.start(); }
+    }
+}
+</script>
 
 <!-- ═══════════════════════════════════════════════════════════
      SERVICES OVERVIEW
      ═══════════════════════════════════════════════════════════ -->
-<section class="py-20 bg-white">
+<section class="py-20 bg-white dark:bg-slate-800/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16 reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full text-xs font-bold text-brand-600 mb-4">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 dark:bg-brand-500/10 rounded-full text-xs font-bold text-brand-600 dark:text-brand-400 mb-4">
                 <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> What We Do
             </div>
-            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4">Consulting & Advisory <span class="gradient-text">Services</span></h2>
-            <p class="text-slate-500 max-w-2xl mx-auto">We help organizations optimize operations, manage workforce, and drive business growth through strategic advisory and technology solutions.</p>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-4">Consulting & Advisory <span class="gradient-text">Services</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">We help organizations optimize operations, manage workforce, and drive business growth through strategic advisory and technology solutions.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -152,12 +163,12 @@ include __DIR__ . '/includes/header.php';
             ];
             foreach ($services as $i => $svc):
             ?>
-            <div class="reveal group relative bg-white rounded-2xl p-6 border border-slate-100 hover:border-<?= $svc[4] ?>-200 hover:shadow-xl hover:shadow-<?= $svc[4] ?>-500/10 transition-all duration-300" style="transition-delay: <?= $i * 80 ?>ms">
+            <div class="reveal group relative bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:border-<?= $svc[4] ?>-200 dark:hover:border-<?= $svc[4] ?>-500/30 hover:shadow-xl hover:shadow-<?= $svc[4] ?>-500/10 transition-all duration-300" style="transition-delay: <?= $i * 80 ?>ms">
                 <div class="w-14 h-14 rounded-2xl bg-gradient-to-br <?= $svc[3] ?> flex items-center justify-center shadow-lg shadow-<?= $svc[4] ?>-500/30 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="<?= $svc[2] ?>" class="w-7 h-7 text-white"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2"><?= $svc[0] ?></h3>
-                <p class="text-sm text-slate-500 leading-relaxed"><?= $svc[1] ?></p>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2"><?= $svc[0] ?></h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed"><?= $svc[1] ?></p>
             </div>
             <?php endforeach; ?>
         </div>
@@ -178,31 +189,31 @@ include __DIR__ . '/includes/header.php';
 <section class="py-20 mesh-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16 reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full text-xs font-bold text-purple-600 mb-4">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-500/10 rounded-full text-xs font-bold text-purple-600 dark:text-purple-400 mb-4">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Our Products
             </div>
-            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4">Digital <span class="gradient-text">Solutions</span></h2>
-            <p class="text-slate-500 max-w-2xl mx-auto">Cutting-edge software platforms designed to streamline operations and drive organizational efficiency.</p>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-4">Digital <span class="gradient-text">Solutions</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Cutting-edge software platforms designed to streamline operations and drive organizational efficiency.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ($featured_products as $i => $product): 
                 $features = json_decode($product['features'], true) ?: [];
             ?>
-            <div class="reveal group bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-2 transition-all duration-500" style="transition-delay: <?= $i * 100 ?>ms">
+            <div class="reveal group bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-2 transition-all duration-500" style="transition-delay: <?= $i * 100 ?>ms">
                 <!-- Product Header -->
                 <div class="p-6 bg-gradient-to-br" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>15, <?= $product['color_to'] ?>10);">
                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-4" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
                         <i data-lucide="<?= $product['icon_class'] ?: 'box' ?>" class="w-7 h-7 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900"><?= sanitize($product['name']) ?></h3>
-                    <p class="text-xs text-slate-500 mt-1 font-medium"><?= sanitize($product['tagline']) ?></p>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"><?= sanitize($product['name']) ?></h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium"><?= sanitize($product['tagline']) ?></p>
                 </div>
                 <!-- Features -->
                 <div class="p-6 pt-4">
                     <ul class="space-y-2 mb-6">
                         <?php foreach (array_slice($features, 0, 4) as $feat): ?>
-                        <li class="flex items-center gap-2 text-sm text-slate-600">
+                        <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
                             <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i>
                             <?= sanitize($feat) ?>
                         </li>
@@ -218,6 +229,98 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
+<?php endif; ?>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PRODUCT INFOGRAPHIC SLIDESHOW
+     ═══════════════════════════════════════════════════════════ -->
+<?php
+$slideDir = __DIR__ . '/assets/images/slides/';
+$slideConfigFile = $slideDir . 'config.json';
+$slideConfig = ['duration' => 5, 'aspect' => '16:9'];
+if (file_exists($slideConfigFile)) {
+    $sc = json_decode(file_get_contents($slideConfigFile), true);
+    if ($sc) $slideConfig = array_merge($slideConfig, $sc);
+}
+$aspectMap = ['16:9'=>'aspect-video','4:3'=>'aspect-[4/3]','21:9'=>'aspect-[21/9]','3:2'=>'aspect-[3/2]','1:1'=>'aspect-square'];
+$slideAspect = $aspectMap[$slideConfig['aspect']] ?? 'aspect-video';
+$slideDuration = intval($slideConfig['duration']) * 1000;
+$slideFiles = [];
+if (is_dir($slideDir)) {
+    foreach (glob($slideDir . '*.{png,jpg,jpeg,gif,webp}', GLOB_BRACE) as $f) {
+        $slideFiles[] = basename($f);
+    }
+    sort($slideFiles);
+    $slideFiles = array_slice($slideFiles, 0, 10);
+}
+?>
+<?php if (!empty($slideFiles)): ?>
+<section class="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-xs font-bold text-white/80 mb-4">
+                <i data-lucide="monitor" class="w-3.5 h-3.5"></i> Product Showcase
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">Our <span class="bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent">Digital Products</span> in Action</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">See how our enterprise solutions streamline operations across payroll, audit, workforce management, and more.</p>
+        </div>
+    </div>
+
+    <!-- Slideshow Container -->
+    <div class="relative max-w-6xl mx-auto px-4" x-data="productSlider(<?= count($slideFiles) ?>, <?= $slideDuration ?>)" @mouseenter="pause()" @mouseleave="resume()" @keydown.left.window="prev()" @keydown.right.window="next()">
+        <!-- Slides Viewport -->
+        <div class="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40 border border-white/10">
+            <div class="flex transition-transform duration-700 ease-in-out" :style="'transform: translateX(-' + (current * 100) + '%)'">
+                <?php foreach ($slideFiles as $i => $slide): ?>
+                <div class="w-full flex-shrink-0">
+                    <div class="<?= $slideAspect ?> w-full">
+                        <img src="<?= SITE_URL ?>/assets/images/slides/<?= $slide ?>" alt="Product Screenshot <?= $i + 1 ?>" class="w-full h-full object-contain bg-slate-900" loading="<?= $i === 0 ? 'eager' : 'lazy' ?>">
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Prev / Next Arrows -->
+            <button @click="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 z-10" style="opacity:0.7;">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button @click="next()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 z-10" style="opacity:0.7;">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Dot Navigation -->
+        <div class="flex justify-center gap-2 mt-6">
+            <?php foreach ($slideFiles as $i => $slide): ?>
+            <button @click="goTo(<?= $i ?>)" class="w-2.5 h-2.5 rounded-full transition-all duration-300" :class="current === <?= $i ?> ? 'bg-brand-400 w-8' : 'bg-white/30 hover:bg-white/50'"></button>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Slide Counter -->
+        <div class="text-center mt-3">
+            <span class="text-xs text-slate-500" x-text="(current + 1) + ' / <?= count($slideFiles) ?>'"></span>
+        </div>
+    </div>
+</section>
+
+<script>
+function productSlider(total, duration) {
+    return {
+        current: 0,
+        total: total,
+        duration: duration || 5000,
+        timer: null,
+        init() { this.startAutoPlay(); },
+        startAutoPlay() { this.timer = setInterval(() => this.next(), this.duration); },
+        stopAutoPlay() { clearInterval(this.timer); },
+        next() { this.current = (this.current + 1) % this.total; },
+        prev() { this.current = (this.current - 1 + this.total) % this.total; },
+        goTo(i) { this.current = i; this.stopAutoPlay(); this.startAutoPlay(); },
+        pause() { this.stopAutoPlay(); },
+        resume() { this.startAutoPlay(); }
+    }
+}
+</script>
 <?php endif; ?>
 
 <!-- ═══════════════════════════════════════════════════════════
