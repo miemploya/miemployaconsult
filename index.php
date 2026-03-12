@@ -19,7 +19,71 @@ include __DIR__ . '/includes/header.php';
 <!-- ═══════════════════════════════════════════════════════════
      HERO SECTION
      ═══════════════════════════════════════════════════════════ -->
-<section class="relative overflow-hidden mesh-bg">
+<section class="relative overflow-hidden hero-color-cycle">
+    <style>
+        @keyframes heroBgCycle {
+            0%, 10%   { background-color: rgba(99,102,241,0.04); }
+            33%, 43%  { background-color: rgba(168,85,247,0.05); }
+            66%, 76%  { background-color: rgba(59,130,246,0.04); }
+            100%      { background-color: rgba(99,102,241,0.04); }
+        }
+        .dark .hero-color-cycle {
+            animation-name: heroBgCycleDark !important;
+        }
+        @keyframes heroBgCycleDark {
+            0%, 10%   { background-color: rgba(99,102,241,0.08); }
+            33%, 43%  { background-color: rgba(168,85,247,0.08); }
+            66%, 76%  { background-color: rgba(59,130,246,0.07); }
+            100%      { background-color: rgba(99,102,241,0.08); }
+        }
+        .hero-color-cycle { animation: heroBgCycle 30s ease-in-out infinite; }
+        @keyframes watermarkDrift {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+    </style>
+
+    <!-- Watermark Rain — "Miemploya Consult" repeated -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+        <div class="absolute inset-0 w-full" style="animation: watermarkDrift 40s linear infinite;">
+            <?php
+            $watermarkText = 'Miemploya Consult';
+            $positions = [
+                ['top'=>'-5%','left'=>'5%','rotate'=>'-15','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'5%','left'=>'55%','rotate'=>'10','size'=>'2xl','opacity'=>'0.025'],
+                ['top'=>'15%','left'=>'20%','rotate'=>'-8','size'=>'4xl','opacity'=>'0.035'],
+                ['top'=>'12%','left'=>'75%','rotate'=>'12','size'=>'xl','opacity'=>'0.02'],
+                ['top'=>'25%','left'=>'-5%','rotate'=>'5','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'30%','left'=>'40%','rotate'=>'-12','size'=>'5xl','opacity'=>'0.04'],
+                ['top'=>'35%','left'=>'80%','rotate'=>'8','size'=>'2xl','opacity'=>'0.025'],
+                ['top'=>'45%','left'=>'10%','rotate'=>'-5','size'=>'4xl','opacity'=>'0.035'],
+                ['top'=>'48%','left'=>'60%','rotate'=>'15','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'55%','left'=>'30%','rotate'=>'-10','size'=>'2xl','opacity'=>'0.02'],
+                ['top'=>'60%','left'=>'70%','rotate'=>'6','size'=>'4xl','opacity'=>'0.035'],
+                ['top'=>'65%','left'=>'0%','rotate'=>'-8','size'=>'3xl','opacity'=>'0.025'],
+                ['top'=>'70%','left'=>'50%','rotate'=>'12','size'=>'xl','opacity'=>'0.02'],
+                ['top'=>'78%','left'=>'15%','rotate'=>'-15','size'=>'5xl','opacity'=>'0.04'],
+                ['top'=>'80%','left'=>'65%','rotate'=>'5','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'88%','left'=>'35%','rotate'=>'-6','size'=>'2xl','opacity'=>'0.025'],
+                ['top'=>'92%','left'=>'85%','rotate'=>'10','size'=>'4xl','opacity'=>'0.035'],
+                ['top'=>'100%','left'=>'5%','rotate'=>'-12','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'108%','left'=>'50%','rotate'=>'8','size'=>'5xl','opacity'=>'0.04'],
+                ['top'=>'115%','left'=>'25%','rotate'=>'-5','size'=>'2xl','opacity'=>'0.025'],
+                ['top'=>'120%','left'=>'70%','rotate'=>'12','size'=>'4xl','opacity'=>'0.035'],
+                ['top'=>'130%','left'=>'10%','rotate'=>'-10','size'=>'3xl','opacity'=>'0.03'],
+                ['top'=>'140%','left'=>'55%','rotate'=>'6','size'=>'xl','opacity'=>'0.02'],
+                ['top'=>'150%','left'=>'30%','rotate'=>'-8','size'=>'5xl','opacity'=>'0.04'],
+            ];
+            foreach ($positions as $p):
+            ?>
+            <span class="absolute font-black text-<?= $p['size'] ?> text-slate-900 dark:text-white whitespace-nowrap" 
+                  style="top:<?= $p['top'] ?>;left:<?= $p['left'] ?>;transform:rotate(<?= $p['rotate'] ?>deg);opacity:<?= $p['opacity'] ?>;">
+                <?= $watermarkText ?>
+            </span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
     <!-- Floating Decorations -->
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-20 left-10 w-72 h-72 bg-brand-400/10 rounded-full blur-3xl float-animate"></div>
@@ -163,12 +227,40 @@ function heroSlider() {
             ];
             foreach ($services as $i => $svc):
             ?>
-            <div class="reveal group relative bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:border-<?= $svc[4] ?>-200 dark:hover:border-<?= $svc[4] ?>-500/30 hover:shadow-xl hover:shadow-<?= $svc[4] ?>-500/10 transition-all duration-300" style="transition-delay: <?= $i * 80 ?>ms">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br <?= $svc[3] ?> flex items-center justify-center shadow-lg shadow-<?= $svc[4] ?>-500/30 mb-5 group-hover:scale-110 transition-transform">
+            <style>
+                @keyframes svcCardBg {
+                    0%, 48%  { background-color: rgba(99,102,241,0.04); }
+                    50%, 98% { background-color: rgba(168,85,247,0.05); }
+                    100%     { background-color: rgba(99,102,241,0.04); }
+                }
+                .dark .svc-card-cycle { animation-name: svcCardBgDark !important; }
+                @keyframes svcCardBgDark {
+                    0%, 48%  { background-color: rgba(99,102,241,0.08); }
+                    50%, 98% { background-color: rgba(168,85,247,0.08); }
+                    100%     { background-color: rgba(99,102,241,0.08); }
+                }
+                .svc-card-cycle { animation: svcCardBg 30s ease-in-out infinite; }
+                .svc-card:hover .svc-icon { transform: scale(1.15) rotate(5deg); }
+                .svc-card::after {
+                    content: '';
+                    position: absolute; inset: 0; border-radius: 1rem;
+                    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 60%);
+                    background-size: 250% 100%;
+                    background-position: 100% 0;
+                    transition: background-position 0.6s ease;
+                    pointer-events: none;
+                }
+                .svc-card:hover::after { background-position: -50% 0; }
+                .svc-card:hover { transform: translateY(-6px); }
+            </style>
+            <div class="svc-card svc-card-cycle reveal group relative rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:border-<?= $svc[4] ?>-300 dark:hover:border-<?= $svc[4] ?>-500/40 hover:shadow-2xl hover:shadow-<?= $svc[4] ?>-500/15 transition-all duration-500 cursor-default overflow-hidden" style="transition-delay: <?= $i * 80 ?>ms; animation-delay: <?= $i * 2 ?>s">
+                <div class="svc-icon w-14 h-14 rounded-2xl bg-gradient-to-br <?= $svc[3] ?> flex items-center justify-center shadow-lg shadow-<?= $svc[4] ?>-500/30 mb-5 transition-all duration-500">
                     <i data-lucide="<?= $svc[2] ?>" class="w-7 h-7 text-white"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2"><?= $svc[0] ?></h3>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-<?= $svc[4] ?>-600 dark:group-hover:text-<?= $svc[4] ?>-400 transition-colors"><?= $svc[0] ?></h3>
                 <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed"><?= $svc[1] ?></p>
+                <!-- Bottom accent bar on hover -->
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r <?= $svc[3] ?> scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl"></div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -196,33 +288,72 @@ function heroSlider() {
             <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Cutting-edge software platforms designed to streamline operations and drive organizational efficiency.</p>
         </div>
 
+        <style>
+            .flip-container { perspective: 1200px; }
+            .flip-card { position: relative; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
+            .flip-card.flipped { transform: rotateY(180deg); }
+            .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 1rem; overflow: hidden; }
+            .flip-back { transform: rotateY(180deg); }
+        </style>
+        <?php
+        // Logo finder
+        $productLogosDir = __DIR__ . '/uploads/products/logos/';
+        function _findProdLogo($dir, $slug) {
+            foreach (['png','jpg','jpeg','webp','gif','svg'] as $ext) {
+                if (file_exists($dir . $slug . '.' . $ext)) return $slug . '.' . $ext;
+            }
+            return null;
+        }
+        ?>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ($featured_products as $i => $product): 
                 $features = json_decode($product['features'], true) ?: [];
+                $pLogo = _findProdLogo($productLogosDir, $product['slug']);
             ?>
-            <div class="reveal group bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-2 transition-all duration-500" style="transition-delay: <?= $i * 100 ?>ms">
-                <!-- Product Header -->
-                <div class="p-6 bg-gradient-to-br" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>15, <?= $product['color_to'] ?>10);">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-4" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
-                        <i data-lucide="<?= $product['icon_class'] ?: 'box' ?>" class="w-7 h-7 text-white"></i>
+            <div class="reveal flip-container" style="transition-delay: <?= $i * 100 ?>ms"
+                 x-data="{ flipped: false, timer: null }"
+                 x-init="timer = setInterval(() => { flipped = !flipped }, 10000 + <?= $i * 500 ?>)">
+                <div class="flip-card w-full" :class="flipped ? 'flipped' : ''" style="min-height: 340px;">
+                    <!-- FRONT FACE -->
+                    <div class="flip-front bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:shadow-brand-500/10 transition-all">
+                        <div class="p-6 bg-gradient-to-br" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>15, <?= $product['color_to'] ?>10);">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-4" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
+                                <i data-lucide="<?= $product['icon_class'] ?: 'box' ?>" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white"><?= sanitize($product['name']) ?></h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium"><?= sanitize($product['tagline']) ?></p>
+                        </div>
+                        <div class="p-6 pt-4">
+                            <ul class="space-y-2 mb-6">
+                                <?php foreach (array_slice($features, 0, 4) as $feat): ?>
+                                <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i>
+                                    <?= sanitize($feat) ?>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <a href="<?= SITE_URL ?>/product.php?slug=<?= urlencode($product['slug']) ?>" 
+                               class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-all">
+                                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"><?= sanitize($product['name']) ?></h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium"><?= sanitize($product['tagline']) ?></p>
-                </div>
-                <!-- Features -->
-                <div class="p-6 pt-4">
-                    <ul class="space-y-2 mb-6">
-                        <?php foreach (array_slice($features, 0, 4) as $feat): ?>
-                        <li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
-                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i>
-                            <?= sanitize($feat) ?>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <a href="<?= SITE_URL ?>/product.php?slug=<?= urlencode($product['slug']) ?>" 
-                       class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 group-hover:gap-3 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
+                    <!-- BACK FACE (Logo) -->
+                    <div class="flip-back flex flex-col items-center justify-center text-center border" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>12, <?= $product['color_to'] ?>08); border-color: <?= $product['color_from'] ?>30;">
+                        <?php if ($pLogo): ?>
+                        <img src="<?= SITE_URL ?>/uploads/products/logos/<?= $pLogo ?>?v=<?= filemtime($productLogosDir . $pLogo) ?>" alt="<?= sanitize($product['name']) ?>" class="max-w-[70%] max-h-40 object-contain mb-5 drop-shadow-lg">
+                        <?php else: ?>
+                        <div class="w-24 h-24 rounded-3xl flex items-center justify-center shadow-xl mb-5" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
+                            <i data-lucide="<?= $product['icon_class'] ?: 'box' ?>" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <?php endif; ?>
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white mb-1"><?= sanitize($product['name']) ?></h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium"><?= sanitize($product['tagline']) ?></p>
+                        <a href="<?= SITE_URL ?>/product.php?slug=<?= urlencode($product['slug']) ?>" 
+                           class="mt-5 inline-flex items-center gap-2 px-5 py-2 text-xs font-bold text-white rounded-xl shadow-lg transition-all hover:scale-105" style="background: linear-gradient(135deg, <?= $product['color_from'] ?>, <?= $product['color_to'] ?>);">
+                            View Product <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             <?php endforeach; ?>

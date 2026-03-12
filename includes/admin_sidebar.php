@@ -29,6 +29,7 @@ $nav_sections = [
     ],
     'Products & Services' => [
         ['Products', 'products', 'box', 'from-indigo-500 to-violet-600', 'shadow-indigo-500/30'],
+        ['Product Logos', 'product_logos', 'image', 'from-violet-500 to-purple-600', 'shadow-violet-500/30'],
         ['Consulting', 'consulting', 'message-square', 'from-teal-500 to-emerald-600', 'shadow-teal-500/30'],
         ['Homepage Pins', 'pins', 'pin', 'from-orange-500 to-red-600', 'shadow-orange-500/30'],
     ],
