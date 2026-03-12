@@ -15,7 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'upload_logo' && isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         copy($_FILES['logo']['tmp_name'], $targetDir . 'logo.png');
-        $msg = 'Logo uploaded successfully!';
+        $msg = 'Light theme logo uploaded successfully!';
+    }
+    if ($action === 'upload_logo_dark' && isset($_FILES['logo_dark']) && $_FILES['logo_dark']['error'] === UPLOAD_ERR_OK) {
+        copy($_FILES['logo_dark']['tmp_name'], $targetDir . 'logo_dark.png');
+        $msg = 'Dark theme logo uploaded successfully!';
     }
     if ($action === 'upload_image' && isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $name = preg_replace('/[^a-zA-Z0-9._-]/', '', $_FILES['image']['name']);
@@ -24,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($action === 'delete_image') {
         $file = basename($_POST['file']);
-        if ($file !== 'logo.png' && file_exists($targetDir . $file)) {
+        if ($file !== 'logo.png' && $file !== 'logo_dark.png' && file_exists($targetDir . $file)) {
             unlink($targetDir . $file);
             $msg = 'Image deleted.';
         }
@@ -58,9 +62,9 @@ admin_page_start('Media Bucket', 'Upload & manage site images');
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mb-8">
         <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-brand-50 to-purple-50">
             <h3 class="font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="image" class="w-5 h-5 text-brand-500"></i> Site Logo
+                <i data-lucide="image" class="w-5 h-5 text-brand-500"></i> Site Logo (Light Theme)
             </h3>
-            <p class="text-xs text-slate-500 mt-1">This logo appears in the header, footer, and admin sidebar.</p>
+            <p class="text-xs text-slate-500 mt-1">This logo appears on the <strong>light</strong> theme. Saved as <code class="bg-slate-100 px-1 rounded">logo.png</code>.</p>
         </div>
         <div class="p-6">
             <div class="flex flex-col sm:flex-row items-start gap-6">
@@ -85,6 +89,43 @@ admin_page_start('Media Bucket', 'Upload & manage site images');
                         <input type="file" name="logo" accept="image/*" required class="text-sm file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100">
                         <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brand-500 to-purple-600 text-white font-bold rounded-xl text-sm shadow-lg hover:scale-105 transition-all">
                             Upload Logo
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Theme Logo Upload -->
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mb-8">
+        <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-slate-800 to-slate-900">
+            <h3 class="font-bold text-white flex items-center gap-2">
+                <i data-lucide="moon" class="w-5 h-5 text-amber-400"></i> Site Logo (Dark Theme)
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">This logo appears on the <strong class="text-slate-300">dark</strong> theme. Use a version with light/white text or a transparent background. Saved as <code class="bg-slate-700 px-1 rounded text-slate-300">logo_dark.png</code>.</p>
+        </div>
+        <div class="p-6">
+            <div class="flex flex-col sm:flex-row items-start gap-6">
+                <!-- Preview on dark background -->
+                <div class="w-48 h-32 rounded-xl border-2 border-dashed border-slate-600 flex items-center justify-center bg-slate-800 overflow-hidden">
+                    <?php if (file_exists($imagesDir . 'logo_dark.png')): ?>
+                    <img src="<?= SITE_URL ?>/assets/images/logo_dark.png?v=<?= time() ?>" alt="Dark Logo" class="max-w-full max-h-full object-contain p-2">
+                    <?php else: ?>
+                    <div class="text-center">
+                        <i data-lucide="image-off" class="w-8 h-8 text-slate-600 mx-auto mb-2"></i>
+                        <p class="text-xs text-slate-500">No dark logo</p>
+                        <p class="text-[10px] text-slate-600 mt-1">Will use light logo</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <form method="POST" enctype="multipart/form-data" class="flex-1">
+                    <input type="hidden" name="action" value="upload_logo_dark">
+                    <label class="text-sm font-semibold text-slate-700 mb-2 block">Upload Dark Theme Logo</label>
+                    <p class="text-xs text-slate-400 mb-3">Use a logo that looks good on dark backgrounds (white text, transparent bg, etc).</p>
+                    <div class="flex items-center gap-3">
+                        <input type="file" name="logo_dark" accept="image/*" required class="text-sm file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-600 hover:file:bg-slate-200">
+                        <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-900 text-white font-bold rounded-xl text-sm shadow-lg hover:scale-105 transition-all">
+                            Upload Dark Logo
                         </button>
                     </div>
                 </form>
@@ -135,7 +176,7 @@ admin_page_start('Media Bucket', 'Upload & manage site images');
                         <p class="text-[11px] font-semibold text-slate-700 truncate"><?= htmlspecialchars($img) ?></p>
                         <p class="text-[10px] text-slate-400"><?= round(filesize($imagesDir . $img) / 1024) ?> KB</p>
                     </div>
-                    <?php if ($img !== 'logo.png'): ?>
+                    <?php if ($img !== 'logo.png' && $img !== 'logo_dark.png'): ?>
                     <form method="POST" class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <input type="hidden" name="action" value="delete_image">
                         <input type="hidden" name="file" value="<?= htmlspecialchars($img) ?>">

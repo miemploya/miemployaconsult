@@ -93,7 +93,11 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             
             <!-- Logo -->
             <a href="<?= SITE_URL ?>/index.php" class="flex items-center gap-3 group shrink-0">
-                <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>" class="h-10 lg:h-12 w-auto group-hover:scale-105 transition-transform">
+                <?php $hasDarkLogo = file_exists(__DIR__ . '/../assets/images/logo_dark.png'); ?>
+                <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>" class="h-10 lg:h-12 w-auto group-hover:scale-105 transition-transform <?= $hasDarkLogo ? 'dark:hidden' : '' ?>">
+                <?php if ($hasDarkLogo): ?>
+                <img src="<?= SITE_URL ?>/assets/images/logo_dark.png" alt="<?= SITE_NAME ?>" class="h-10 lg:h-12 w-auto group-hover:scale-105 transition-transform hidden dark:block">
+                <?php endif; ?>
                 <div class="hidden sm:block">
                     <p class="text-lg font-black text-slate-900 dark:text-white tracking-tight leading-tight"><?= SITE_NAME ?></p>
                     <p class="text-[10px] text-slate-400 dark:text-slate-500 font-medium uppercase tracking-widest"><?= COMPANY_TAGLINE ?></p>
@@ -115,6 +119,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                     ['Templates', 'templates', 'file-text', 'Download business templates'],
                     ['News', 'news', 'newspaper', 'Latest updates & media'],
                     ['Videos', 'videos', 'video', 'Watch our video content'],
+                    ['Books', 'books', 'book-open', 'Download books & guides'],
                 ];
                 $dropdown_pages = array_column($dropdown_items, 1);
                 foreach ($nav_items as $item):
@@ -221,6 +226,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                 ['Templates', 'templates', 'file-text'],
                 ['News', 'news', 'newspaper'],
                 ['Videos', 'videos', 'video'],
+                ['Books', 'books', 'book-open'],
                 ['Contact', 'contact', 'phone'],
             ];
             foreach ($all_mobile_items as $item):

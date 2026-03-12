@@ -48,6 +48,7 @@ define('UPLOAD_NEWS', UPLOAD_DIR . 'news/');
 define('UPLOAD_VIDEOS', UPLOAD_DIR . 'videos/');
 define('UPLOAD_PRODUCTS', UPLOAD_DIR . 'products/');
 define('UPLOAD_LOGOS', UPLOAD_DIR . 'logos/');
+define('UPLOAD_BOOKS', UPLOAD_DIR . 'books/');
 
 // ── Upload Limits ───────────────────────────────────────────
 define('MAX_CV_SIZE', 5 * 1024 * 1024);       // 5MB

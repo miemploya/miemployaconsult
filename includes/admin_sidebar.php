@@ -25,6 +25,7 @@ $nav_sections = [
         ['Media Bucket', 'media', 'folder-open', 'from-amber-500 to-yellow-600', 'shadow-amber-500/30'],
         ['Product Slides', 'slides', 'presentation', 'from-indigo-500 to-blue-600', 'shadow-indigo-500/30'],
         ['Hero Slides', 'hero_slides', 'monitor', 'from-cyan-500 to-teal-600', 'shadow-cyan-500/30'],
+        ['Books', 'books', 'book-open', 'from-amber-500 to-orange-600', 'shadow-amber-500/30'],
     ],
     'Products & Services' => [
         ['Products', 'products', 'box', 'from-indigo-500 to-violet-600', 'shadow-indigo-500/30'],

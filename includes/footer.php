@@ -7,7 +7,12 @@
             <!-- Brand Column -->
             <div class="lg:col-span-1">
                 <div class="flex items-center gap-3 mb-6">
+                    <?php $footerDarkLogo = file_exists(__DIR__ . '/../assets/images/logo_dark.png'); ?>
+                    <?php if ($footerDarkLogo): ?>
+                    <img src="<?= SITE_URL ?>/assets/images/logo_dark.png" alt="<?= SITE_NAME ?>" class="h-12 w-auto">
+                    <?php else: ?>
                     <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>" class="h-12 w-auto">
+                    <?php endif; ?>
                     <div>
                         <p class="text-lg font-black text-white tracking-tight"><?= SITE_NAME ?></p>
                         <p class="text-[10px] text-slate-500 uppercase tracking-widest"><?= COMPANY_TAGLINE ?></p>
@@ -96,6 +101,38 @@
         </div>
     </div>
 </footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     FLOATING ACTION BUTTONS
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Training CTA — Bottom Left -->
+<a href="<?= SITE_URL ?>/training.php" class="fixed bottom-6 left-6 z-50 group">
+    <div class="flex items-center gap-2 pl-3 pr-5 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-full shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 hover:scale-105 transition-all duration-300">
+        <span class="relative flex items-center justify-center">
+            <span class="absolute w-10 h-10 bg-white/20 rounded-full animate-ping"></span>
+            <span class="relative w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </span>
+        </span>
+        <div class="leading-tight">
+            <p class="text-sm font-black">Free Training!!!</p>
+            <p class="text-[10px] font-medium opacity-80">Register Now</p>
+        </div>
+    </div>
+</a>
+
+<!-- WhatsApp Chat — Bottom Right -->
+<a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 group" title="Chat with us on WhatsApp">
+    <div class="flex items-center gap-2 pl-3 pr-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-full shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:scale-105 transition-all duration-300">
+        <span class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        </span>
+        <div class="leading-tight">
+            <p class="text-sm font-black">Chat with us</p>
+        </div>
+    </div>
+</a>
 
 <!-- Initialize Lucide Icons -->
 <script>
